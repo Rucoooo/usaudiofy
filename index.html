@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotify Premium - Get Free Access!</title>
+    <title>Spotify Jobs Available - $16-$36/hr</title>
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Meta Pixel -->
@@ -20,9 +20,9 @@
         fbq('track', 'PageView');
 
         const pageProps = {
-            content_name: 'Spotify Premium Landing Page',
-            content_category: 'Music Streaming',
-            content_ids: ['spotify_premium_landing'],
+            content_name: 'Spotify Jobs Landing Page',
+            content_category: 'Job Opportunities',
+            content_ids: ['spotify_jobs_landing'],
             content_type: 'product_group'
         };
         fbq('track', 'ViewContent', pageProps);
@@ -104,7 +104,7 @@
             animation: slideOutToRight 0.7s ease-in;
         }
 
-        /* Spotify-style transitions for interactive elements */
+        /* Professional job board styling */
         button {
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             transform-origin: center;
@@ -124,7 +124,7 @@
             transition: all 0.1s ease;
         }
 
-        /* Button glow effect */
+        /* Button shimmer effect */
         button::before {
             content: '';
             position: absolute;
@@ -239,7 +239,7 @@
             box-shadow: 0 16px 40px rgba(29, 185, 84, 0.6);
         }
 
-        /* Background patterns with music animation */
+        /* Background patterns with professional animation */
         .bg-pattern {
             background-image: 
                 radial-gradient(circle at 20% 50%, rgba(29, 185, 84, 0.1) 0%, transparent 50%),
@@ -314,8 +314,8 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Music icon animation */
-        .music-icon {
+        /* Job icon animation */
+        .job-icon {
             animation: pulse 2s ease-in-out infinite;
         }
 
@@ -340,13 +340,50 @@
             background: linear-gradient(135deg, #191414 0%, #1db954 25%, #1ed760 50%, #1db954 75%, #191414 100%);
         }
 
-        /* Premium value styling */
-        .premium-value {
+        /* Salary styling */
+        .salary-range {
             background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-shadow: 0 2px 4px rgba(29, 185, 84, 0.3);
+        }
+
+        /* Job board modal styling */
+        .job-modal {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border: 2px solid #1db954;
+            border-radius: 20px;
+            padding: 24px;
+            margin: 16px;
+            box-shadow: 0 20px 40px rgba(29, 185, 84, 0.3);
+        }
+
+        /* Question styling */
+        .question-option {
+            background: rgba(29, 185, 84, 0.1);
+            border: 2px solid #1db954;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 600;
+            color: #1db954;
+        }
+
+        .question-option:hover {
+            background: #1db954;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(29, 185, 84, 0.3);
+        }
+
+        .question-option.selected {
+            background: #1db954;
+            color: white;
         }
     </style>
 </head>
@@ -369,13 +406,13 @@
                     
                     <!-- Spotify Banner Image with Timed Shake Animation -->
                     <div class="mb-8">
-                        <img id="spotifyBanner" src="images/spotify-banner.png" alt="Spotify Banner" class="banner-image">
+                        <img id="spotifyBanner" src="images/spotify-jobs-banner.png" alt="Spotify Jobs Banner" class="banner-image">
                     </div>
 
                     <!-- Title -->
                     <div class="text-center mb-8">
                         <h1 class="text-3xl font-bold text-gray-900 mb-4 leading-tight">
-                            Get Spotify Premium Free!
+                            Spotify Jobs Available
                         </h1>
                         <div class="trust-indicator flex items-center justify-center gap-2 text-sm text-gray-600 mb-6">
                             <span>Verified by</span>
@@ -387,17 +424,30 @@
                             </div>
                         </div>
 
-                        <!-- Premium Value Display -->
+                        <!-- Salary Range Display -->
                         <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-200 mb-8">
-                            <div class="text-4xl font-bold premium-value mb-2">6 Months Free</div>
-                            <div class="text-green-600 font-medium text-lg">Spotify Premium Access</div>
-                            <div class="text-sm text-gray-500 mt-2">Worth $59.94 - Limited Time</div>
+                            <div class="text-4xl font-bold salary-range mb-2">$16 - $36/hr</div>
+                            <div class="text-green-600 font-medium text-lg">Remote & Flexible Hours</div>
+                            <div class="text-sm text-gray-500 mt-2">When Can You Start Working?</div>
+                        </div>
+                    </div>
+
+                    <!-- Job Start Options -->
+                    <div class="space-y-4 mb-8">
+                        <div class="question-option" onclick="selectOption(this, 'immediately')">
+                            Immediately
+                        </div>
+                        <div class="question-option" onclick="selectOption(this, 'within-30-days')">
+                            Within 30 days
+                        </div>
+                        <div class="question-option" onclick="selectOption(this, 'just-looking')">
+                            Just Looking
                         </div>
                     </div>
 
                     <!-- CTA Button -->
-                    <button id="claimButton" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-6 px-8 rounded-2xl flex items-center justify-center gap-3 mb-6 text-xl shadow-lg">
-                        <span id="buttonText">GET PREMIUM FREE</span>
+                    <button id="applyButton" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-6 px-8 rounded-2xl flex items-center justify-center gap-3 mb-6 text-xl shadow-lg">
+                        <span id="buttonText">APPLY FOR SPOTIFY JOBS</span>
                         <svg id="buttonArrow" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>
@@ -424,10 +474,10 @@
                                     <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"></polygon>
                                 </svg>
                             </div>
-                            <span class="font-bold text-gray-900">10M+ users</span>
+                            <span class="font-bold text-gray-900">50K+ employees</span>
                         </div>
                         <div class="text-xs text-gray-500">
-                            Safe & Secure • Spotify Verified Program
+                            JobHuntSimplified is a job search engine. We are not an agent or representative of any employer.
                         </div>
                     </div>
                 </div>
@@ -435,16 +485,16 @@
                 <!-- Bottom Stats -->
                 <div class="mt-6 grid grid-cols-3 gap-4 text-center">
                     <div class="stat-card bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-                        <div class="text-white font-bold text-lg">10M+</div>
-                        <div class="text-green-200 text-xs">Premium Users</div>
+                        <div class="text-white font-bold text-lg">50K+</div>
+                        <div class="text-green-200 text-xs">Employees</div>
                     </div>
                     <div class="stat-card bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-                        <div class="text-white font-bold text-lg">100M+</div>
-                        <div class="text-green-200 text-xs">Songs Available</div>
+                        <div class="text-white font-bold text-lg">$36/hr</div>
+                        <div class="text-green-200 text-xs">Max Salary</div>
                     </div>
                     <div class="stat-card bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
                         <div class="text-white font-bold text-lg">4.8★</div>
-                        <div class="text-green-200 text-xs">App Rating</div>
+                        <div class="text-green-200 text-xs">Company Rating</div>
                     </div>
                 </div>
             </div>
@@ -453,27 +503,28 @@
 
     <script>
         // 🎯 REDIRECT CONFIGURATION - CHANGE THIS URL TO YOUR OFFER LINK
-        const OFFER_URL = 'https://your-spotify-premium-offer-url.com';
+        const OFFER_URL = 'https://your-spotify-jobs-offer-url.com';
         
-        // Testimonial data for Spotify users
+        // Testimonial data for Spotify job applicants
         const testimonials = [
-            { name: 'MusicLover23', amount: '6 months free', color: 'bg-green-500', action: 'got' },
-            { name: 'PlaylistKing', amount: 'Premium access', color: 'bg-emerald-500', action: 'unlocked' },
-            { name: 'BeatDropper', amount: '6 months free', color: 'bg-teal-500', action: 'claimed' },
-            { name: 'SongHunter', amount: 'Premium features', color: 'bg-lime-500', action: 'activated' },
-            { name: 'VibeChecker', amount: '6 months free', color: 'bg-green-600', action: 'received' },
-            { name: 'MelodyMaster', amount: 'Premium access', color: 'bg-emerald-600', action: 'got' },
-            { name: 'RhythmRider', amount: '6 months free', color: 'bg-teal-600', action: 'unlocked' },
-            { name: 'TuneSeeker', amount: 'Premium features', color: 'bg-lime-600', action: 'claimed' },
-            { name: 'AudioAddict', amount: '6 months free', color: 'bg-green-700', action: 'activated' },
-            { name: 'SoundWave', amount: 'Premium access', color: 'bg-emerald-700', action: 'received' },
-            { name: 'BassBooster', amount: '6 months free', color: 'bg-teal-700', action: 'got' }
+            { name: 'Sarah M.', amount: '$28/hr position', color: 'bg-green-500', action: 'got hired for' },
+            { name: 'Jake R.', amount: '$32/hr role', color: 'bg-emerald-500', action: 'landed' },
+            { name: 'Emma L.', amount: '$36/hr job', color: 'bg-teal-500', action: 'secured' },
+            { name: 'David K.', amount: '$25/hr position', color: 'bg-lime-500', action: 'started' },
+            { name: 'Lisa T.', amount: '$30/hr role', color: 'bg-green-600', action: 'got hired for' },
+            { name: 'Alex P.', amount: '$34/hr job', color: 'bg-emerald-600', action: 'landed' },
+            { name: 'Maya W.', amount: '$29/hr position', color: 'bg-teal-600', action: 'secured' },
+            { name: 'Chris B.', amount: '$31/hr role', color: 'bg-lime-600', action: 'started' },
+            { name: 'Taylor S.', amount: '$27/hr job', color: 'bg-green-700', action: 'got hired for' },
+            { name: 'Jordan H.', amount: '$35/hr position', color: 'bg-emerald-700', action: 'landed' },
+            { name: 'Riley J.', amount: '$26/hr role', color: 'bg-teal-700', action: 'secured' }
         ];
 
         let currentTestimonialIndex = 0;
         let testimonialTimeout;
         let engagementTracked = false;
         let scrollTracked = false;
+        let selectedOption = null;
 
         // Timed shake animation function
         function triggerShakeAnimation() {
@@ -489,22 +540,34 @@
         // Start shake animation every 3 seconds
         setInterval(triggerShakeAnimation, 3000);
 
+        // Option selection function
+        function selectOption(element, option) {
+            // Remove selected class from all options
+            document.querySelectorAll('.question-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+            selectedOption = option;
+        }
+
         function createTestimonialPopup(testimonial) {
             const popup = document.createElement('div');
             popup.className = 'testimonial-popup bg-white bg-opacity-95 backdrop-blur-sm rounded-xl p-4 shadow-2xl border border-green-100';
             
             popup.innerHTML = `
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center music-icon">
+                    <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center job-icon">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6"></path>
                         </svg>
                     </div>
                     <div class="text-sm">
                         <span class="font-bold text-green-600">${testimonial.name}</span>
                         <span class="text-gray-700"> just ${testimonial.action} </span>
                         <span class="font-bold text-gray-900">${testimonial.amount}</span>
-                        <span class="text-gray-700"> on Spotify!</span>
+                        <span class="text-gray-700"> at Spotify!</span>
                     </div>
                 </div>
             `;
@@ -536,11 +599,11 @@
         // Meta Pixel conversion tracking function
         function trackConversion() {
             const conversionProps = {
-                content_name: 'Spotify Premium Free Access',
-                content_category: 'Music Streaming',
-                content_ids: ['spotify_premium_free_access'],
+                content_name: 'Spotify Jobs Application',
+                content_category: 'Job Opportunities',
+                content_ids: ['spotify_jobs_application'],
                 content_type: 'product_group',
-                value: 59.94,
+                value: 36,
                 currency: 'USD'
             };
             
@@ -557,13 +620,13 @@
 
         // Enhanced button click handler with loading state and redirect
         function handleButtonClick() {
-            const button = document.getElementById('claimButton');
+            const button = document.getElementById('applyButton');
             const buttonText = document.getElementById('buttonText');
             const buttonArrow = document.getElementById('buttonArrow');
             
             // Add loading state
             button.classList.add('loading');
-            buttonText.textContent = 'PROCESSING...';
+            buttonText.textContent = 'PROCESSING APPLICATION...';
             buttonArrow.style.display = 'none';
             
             // Track the conversion with Meta Pixel
@@ -579,7 +642,7 @@
         setTimeout(showNextTestimonial, 2000);
         
         // Add click event listener to the button
-        document.getElementById('claimButton').addEventListener('click', function(e) {
+        document.getElementById('applyButton').addEventListener('click', function(e) {
             e.preventDefault();
             handleButtonClick();
         });
@@ -589,9 +652,9 @@
             if (!engagementTracked) {
                 try {
                     fbq('track', 'ViewContent', {
-                        content_name: 'Spotify Premium - Engaged User',
-                        content_category: 'Music Streaming',
-                        content_ids: ['spotify_premium_engaged'],
+                        content_name: 'Spotify Jobs - Engaged User',
+                        content_category: 'Job Opportunities',
+                        content_ids: ['spotify_jobs_engaged'],
                         content_type: 'product_group'
                     });
                     engagementTracked = true;
@@ -615,9 +678,9 @@
             if (!scrollTracked && window.scrollY > 100) {
                 try {
                     fbq('track', 'ViewContent', {
-                        content_name: 'Spotify Premium - Scroll Engagement',
-                        content_category: 'Music Streaming',
-                        content_ids: ['spotify_premium_scroll'],
+                        content_name: 'Spotify Jobs - Scroll Engagement',
+                        content_category: 'Job Opportunities',
+                        content_ids: ['spotify_jobs_scroll'],
                         content_type: 'product_group'
                     });
                     scrollTracked = true;
@@ -634,7 +697,7 @@
         // Preload images for better performance
         function preloadImages() {
             const images = [
-                'images/spotify-banner.png'
+                'images/spotify-jobs-banner.png'
             ];
             
             images.forEach(src => {
