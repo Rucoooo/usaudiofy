@@ -1,1 +1,670 @@
-Host here
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Premium - Get Free Access!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Meta Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s){
+            if(f.fbq)return;
+            n=f.fbq=function(){ n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments) };
+            if(!f._fbq)f._fbq=n; n.push=n; n.loaded=!0; n.version='2.0';
+            n.queue=[]; t=b.createElement(e); t.async=!0;
+            t.src=v; s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s);
+        }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+        fbq('init', '1642827413055904');
+        fbq('track', 'PageView');
+
+        const pageProps = {
+            content_name: 'Spotify Premium Landing Page',
+            content_category: 'Music Streaming',
+            content_ids: ['spotify_premium_landing'],
+            content_type: 'product_group'
+        };
+        fbq('track', 'ViewContent', pageProps);
+    </script>
+    
+    <style>
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            10%, 30%, 50%, 70%, 90% {
+                transform: translateX(-10px);
+            }
+            20%, 40%, 60%, 80% {
+                transform: translateX(10px);
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutToRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        @keyframes spotifyGlow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(29, 185, 84, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(29, 185, 84, 0.6);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-shake {
+            animation: shake 0.8s ease-in-out;
+        }
+
+        .testimonial-popup {
+            position: fixed;
+            top: 20px;
+            left: 16px;
+            right: 16px;
+            z-index: 1000;
+            animation: slideInFromLeft 0.7s ease-out;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .testimonial-popup.slide-out {
+            animation: slideOutToRight 0.7s ease-in;
+        }
+
+        /* Spotify-style transitions for interactive elements */
+        button {
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(29, 185, 84, 0.4),
+                0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        button:active {
+            transform: translateY(-1px) scale(0.98);
+            transition: all 0.1s ease;
+        }
+
+        /* Button glow effect */
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: left 0.5s;
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+        /* Smooth card hover effects */
+        .main-card {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+        }
+
+        .main-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 
+                0 25px 50px rgba(29, 185, 84, 0.2),
+                0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Smooth stat card hover effects */
+        .stat-card {
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px) scale(1.03);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 30px rgba(29, 185, 84, 0.2);
+        }
+
+        /* Spotify logo hover effects */
+        .logo-container {
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05) rotate(2deg);
+            animation: spotifyGlow 2s ease-in-out infinite;
+        }
+
+        /* Custom scrollbar for Spotify theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #1db954, #1ed760);
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #1ed760, #1db954);
+        }
+
+        /* Glass morphism effects */
+        .backdrop-blur-sm {
+            backdrop-filter: blur(12px);
+        }
+
+        /* Enhanced focus states */
+        button:focus {
+            outline: none;
+            box-shadow: 
+                0 0 0 3px rgba(29, 185, 84, 0.3),
+                0 20px 40px rgba(29, 185, 84, 0.4);
+        }
+
+        /* Spotify-style gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Banner-style logo image styling */
+        .banner-image {
+            width: 100%;
+            max-width: 400px;
+            height: 200px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 12px 32px rgba(29, 185, 84, 0.4);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            margin: 0 auto;
+            display: block;
+        }
+
+        .banner-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 16px 40px rgba(29, 185, 84, 0.6);
+        }
+
+        /* Background patterns with music animation */
+        .bg-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(29, 185, 84, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(30, 215, 96, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(25, 20, 20, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        /* Smooth testimonial popup effects */
+        .testimonial-popup {
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+        }
+
+        .testimonial-popup:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 24px rgba(29, 185, 84, 0.2);
+        }
+
+        /* Responsive text scaling */
+        @media (max-width: 640px) {
+            .text-3xl {
+                font-size: 2rem;
+            }
+            
+            button:hover {
+                transform: translateY(-2px) scale(1.01);
+            }
+            
+            .main-card:hover {
+                transform: translateY(-3px) scale(1.005);
+            }
+
+            .testimonial-popup {
+                left: 8px;
+                right: 8px;
+            }
+
+            .banner-image {
+                height: 150px;
+            }
+        }
+
+        /* Trust indicator smooth hover */
+        .trust-indicator {
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .trust-indicator:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Loading animation for button */
+        .loading {
+            position: relative;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            margin: auto;
+            border: 2px solid transparent;
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 1s ease infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Music icon animation */
+        .music-icon {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Enhanced card shadow on scroll */
+        .main-card.scrolled {
+            box-shadow: 
+                0 35px 70px rgba(29, 185, 84, 0.15),
+                0 18px 36px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Spotify gradient background */
+        .spotify-gradient {
+            background: linear-gradient(135deg, #191414 0%, #1db954 25%, #1ed760 50%, #1db954 75%, #191414 100%);
+        }
+
+        /* Premium value styling */
+        .premium-value {
+            background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(29, 185, 84, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- noscript fall-backs -->
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1642827413055904&ev=PageView&noscript=1" /></noscript>
+
+    <div class="min-h-screen spotify-gradient relative overflow-hidden bg-pattern">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-10 w-32 h-32 bg-green-400 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute top-40 right-20 w-24 h-24 bg-green-300 rounded-full blur-2xl animate-pulse" style="animation-delay: 1s;"></div>
+            <div class="absolute bottom-32 left-1/4 w-40 h-40 bg-green-500 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+        </div>
+
+        <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+            <div class="w-full max-w-lg">
+                <!-- Main Card -->
+                <div id="mainCard" class="main-card bg-white bg-opacity-95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 animate-float border border-green-100">
+                    
+                    <!-- Spotify Banner Image with Timed Shake Animation -->
+                    <div class="mb-8">
+                        <img id="spotifyBanner" src="images/spotify-banner.png" alt="Spotify Banner" class="banner-image">
+                    </div>
+
+                    <!-- Title -->
+                    <div class="text-center mb-8">
+                        <h1 class="text-3xl font-bold text-gray-900 mb-4 leading-tight">
+                            Get Spotify Premium Free!
+                        </h1>
+                        <div class="trust-indicator flex items-center justify-center gap-2 text-sm text-gray-600 mb-6">
+                            <span>Verified by</span>
+                            <span class="font-bold text-green-600">Spotify</span>
+                            <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
+                                <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Premium Value Display -->
+                        <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-200 mb-8">
+                            <div class="text-4xl font-bold premium-value mb-2">6 Months Free</div>
+                            <div class="text-green-600 font-medium text-lg">Spotify Premium Access</div>
+                            <div class="text-sm text-gray-500 mt-2">Worth $59.94 - Limited Time</div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <button id="claimButton" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-6 px-8 rounded-2xl flex items-center justify-center gap-3 mb-6 text-xl shadow-lg">
+                        <span id="buttonText">GET PREMIUM FREE</span>
+                        <svg id="buttonArrow" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Trust Indicators -->
+                    <div class="text-center">
+                        <div class="trust-indicator flex items-center justify-center gap-2 text-sm mb-2">
+                            <span class="font-bold text-gray-900">Trusted by</span>
+                            <div class="flex gap-1">
+                                <svg class="w-4 h-4 fill-green-500 text-green-500" viewBox="0 0 24 24">
+                                    <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"></polygon>
+                                </svg>
+                                <svg class="w-4 h-4 fill-green-500 text-green-500" viewBox="0 0 24 24">
+                                    <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"></polygon>
+                                </svg>
+                                <svg class="w-4 h-4 fill-green-500 text-green-500" viewBox="0 0 24 24">
+                                    <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"></polygon>
+                                </svg>
+                                <svg class="w-4 h-4 fill-green-500 text-green-500" viewBox="0 0 24 24">
+                                    <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"></polygon>
+                                </svg>
+                                <svg class="w-4 h-4 fill-green-500 text-green-500" viewBox="0 0 24 24">
+                                    <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"></polygon>
+                                </svg>
+                            </div>
+                            <span class="font-bold text-gray-900">10M+ users</span>
+                        </div>
+                        <div class="text-xs text-gray-500">
+                            Safe & Secure • Spotify Verified Program
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Stats -->
+                <div class="mt-6 grid grid-cols-3 gap-4 text-center">
+                    <div class="stat-card bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                        <div class="text-white font-bold text-lg">10M+</div>
+                        <div class="text-green-200 text-xs">Premium Users</div>
+                    </div>
+                    <div class="stat-card bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                        <div class="text-white font-bold text-lg">100M+</div>
+                        <div class="text-green-200 text-xs">Songs Available</div>
+                    </div>
+                    <div class="stat-card bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+                        <div class="text-white font-bold text-lg">4.8★</div>
+                        <div class="text-green-200 text-xs">App Rating</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 🎯 REDIRECT CONFIGURATION - CHANGE THIS URL TO YOUR OFFER LINK
+        const OFFER_URL = 'https://your-spotify-premium-offer-url.com';
+        
+        // Testimonial data for Spotify users
+        const testimonials = [
+            { name: 'MusicLover23', amount: '6 months free', color: 'bg-green-500', action: 'got' },
+            { name: 'PlaylistKing', amount: 'Premium access', color: 'bg-emerald-500', action: 'unlocked' },
+            { name: 'BeatDropper', amount: '6 months free', color: 'bg-teal-500', action: 'claimed' },
+            { name: 'SongHunter', amount: 'Premium features', color: 'bg-lime-500', action: 'activated' },
+            { name: 'VibeChecker', amount: '6 months free', color: 'bg-green-600', action: 'received' },
+            { name: 'MelodyMaster', amount: 'Premium access', color: 'bg-emerald-600', action: 'got' },
+            { name: 'RhythmRider', amount: '6 months free', color: 'bg-teal-600', action: 'unlocked' },
+            { name: 'TuneSeeker', amount: 'Premium features', color: 'bg-lime-600', action: 'claimed' },
+            { name: 'AudioAddict', amount: '6 months free', color: 'bg-green-700', action: 'activated' },
+            { name: 'SoundWave', amount: 'Premium access', color: 'bg-emerald-700', action: 'received' },
+            { name: 'BassBooster', amount: '6 months free', color: 'bg-teal-700', action: 'got' }
+        ];
+
+        let currentTestimonialIndex = 0;
+        let testimonialTimeout;
+        let engagementTracked = false;
+        let scrollTracked = false;
+
+        // Timed shake animation function
+        function triggerShakeAnimation() {
+            const banner = document.getElementById('spotifyBanner');
+            banner.classList.add('animate-shake');
+            
+            // Remove the shake class after animation completes
+            setTimeout(() => {
+                banner.classList.remove('animate-shake');
+            }, 800);
+        }
+
+        // Start shake animation every 3 seconds
+        setInterval(triggerShakeAnimation, 3000);
+
+        function createTestimonialPopup(testimonial) {
+            const popup = document.createElement('div');
+            popup.className = 'testimonial-popup bg-white bg-opacity-95 backdrop-blur-sm rounded-xl p-4 shadow-2xl border border-green-100';
+            
+            popup.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center music-icon">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                        </svg>
+                    </div>
+                    <div class="text-sm">
+                        <span class="font-bold text-green-600">${testimonial.name}</span>
+                        <span class="text-gray-700"> just ${testimonial.action} </span>
+                        <span class="font-bold text-gray-900">${testimonial.amount}</span>
+                        <span class="text-gray-700"> on Spotify!</span>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(popup);
+
+            // Remove popup after 4 seconds
+            setTimeout(() => {
+                popup.classList.add('slide-out');
+                setTimeout(() => {
+                    if (popup.parentNode) {
+                        popup.parentNode.removeChild(popup);
+                    }
+                }, 700);
+            }, 4000);
+        }
+
+        function showNextTestimonial() {
+            const testimonial = testimonials[currentTestimonialIndex];
+            createTestimonialPopup(testimonial);
+            
+            currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
+            
+            // Schedule next testimonial (random interval between 3-7 seconds)
+            const nextInterval = Math.random() * 4000 + 3000; // 3-7 seconds
+            testimonialTimeout = setTimeout(showNextTestimonial, nextInterval);
+        }
+
+        // Meta Pixel conversion tracking function
+        function trackConversion() {
+            const conversionProps = {
+                content_name: 'Spotify Premium Free Access',
+                content_category: 'Music Streaming',
+                content_ids: ['spotify_premium_free_access'],
+                content_type: 'product_group',
+                value: 59.94,
+                currency: 'USD'
+            };
+            
+            try {
+                // Track multiple conversion events for better optimization
+                fbq('track', 'InitiateCheckout', conversionProps);
+                fbq('track', 'SubmitApplication', conversionProps);
+                fbq('track', 'Lead', conversionProps);
+                console.log('Meta Pixel conversion events tracked successfully');
+            } catch(e) {
+                console.error('Meta Pixel tracking error:', e);
+            }
+        }
+
+        // Enhanced button click handler with loading state and redirect
+        function handleButtonClick() {
+            const button = document.getElementById('claimButton');
+            const buttonText = document.getElementById('buttonText');
+            const buttonArrow = document.getElementById('buttonArrow');
+            
+            // Add loading state
+            button.classList.add('loading');
+            buttonText.textContent = 'PROCESSING...';
+            buttonArrow.style.display = 'none';
+            
+            // Track the conversion with Meta Pixel
+            trackConversion();
+            
+            // Redirect to the offer URL after tracking completes
+            setTimeout(function() {
+                window.location.href = OFFER_URL;
+            }, 1000);
+        }
+
+        // Start showing testimonials after 2 seconds
+        setTimeout(showNextTestimonial, 2000);
+        
+        // Add click event listener to the button
+        document.getElementById('claimButton').addEventListener('click', function(e) {
+            e.preventDefault();
+            handleButtonClick();
+        });
+
+        // Additional page engagement tracking
+        setTimeout(() => {
+            if (!engagementTracked) {
+                try {
+                    fbq('track', 'ViewContent', {
+                        content_name: 'Spotify Premium - Engaged User',
+                        content_category: 'Music Streaming',
+                        content_ids: ['spotify_premium_engaged'],
+                        content_type: 'product_group'
+                    });
+                    engagementTracked = true;
+                    console.log('Engagement tracking completed');
+                } catch(e) {
+                    console.error('Engagement tracking error:', e);
+                }
+            }
+        }, 10000);
+
+        // Track scroll engagement
+        window.addEventListener('scroll', () => {
+            const mainCard = document.getElementById('mainCard');
+            
+            if (window.scrollY > 50) {
+                mainCard.classList.add('scrolled');
+            } else {
+                mainCard.classList.remove('scrolled');
+            }
+
+            if (!scrollTracked && window.scrollY > 100) {
+                try {
+                    fbq('track', 'ViewContent', {
+                        content_name: 'Spotify Premium - Scroll Engagement',
+                        content_category: 'Music Streaming',
+                        content_ids: ['spotify_premium_scroll'],
+                        content_type: 'product_group'
+                    });
+                    scrollTracked = true;
+                    console.log('Scroll engagement tracked');
+                } catch(e) {
+                    console.error('Scroll tracking error:', e);
+                }
+            }
+        });
+
+        // Add smooth scroll behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
+
+        // Preload images for better performance
+        function preloadImages() {
+            const images = [
+                'images/spotify-banner.png'
+            ];
+            
+            images.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            preloadImages();
+            
+            // Add entrance animation to main card
+            setTimeout(() => {
+                document.getElementById('mainCard').style.opacity = '1';
+            }, 100);
+        });
+
+        // Handle page visibility changes for better tracking
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                // Page is hidden, pause testimonials
+                if (testimonialTimeout) {
+                    clearTimeout(testimonialTimeout);
+                }
+            } else {
+                // Page is visible, resume testimonials
+                setTimeout(showNextTestimonial, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
